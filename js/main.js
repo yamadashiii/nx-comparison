@@ -80,7 +80,7 @@
 		
 		// Private
 		_saveSearchState: function() {
-			$.cookie("nxc-search-state", this.keyword);
+			$.cookie("nxc-search-state", this.keyword, {expires: 100});
 		},
 		
 		_restoreSearchState: function() {
@@ -95,7 +95,7 @@
 			var groupKey = this.selectGroup.getSelectedOption().key;
 			var itemKey = this.selectItem.getSelectedOption().key;
 			
-			$.cookie("nxc-selected-state", groupKey + "," + itemKey);
+			$.cookie("nxc-selected-state", groupKey + "," + itemKey, {expires: 100});
 		},
 		
 		_restoreSelectedState: function() {
