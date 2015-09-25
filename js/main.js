@@ -95,10 +95,6 @@
 			var groupKey = this.selectGroup.getSelectedOption().key;
 			var itemKey = this.selectItem.getSelectedOption().key;
 			
-			if (groupKey === "search") {
-				//return;
-			}
-			
 			$.cookie("nxc-selected-state", groupKey + "," + itemKey);
 		},
 		
