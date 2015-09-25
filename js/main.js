@@ -50,6 +50,7 @@
 			this._setItemIndexTable();
 			this._createSelect();
 			this._createTooltip();
+			this._restoreSearchState();
 			this._restoreSelectedState();
 		},
 		
@@ -78,12 +79,24 @@
 		},
 		
 		// Private
+		_saveSearchState: function() {
+			$.cookie("nxc-search-state", this.keyword);
+		},
+		
+		_restoreSearchState: function() {
+			var searchState = $.cookie("nxc-search-state");
+			
+			if (searchState) {
+				$("#nxc-search input").val(searchState);
+			}
+		},
+		
 		_saveSelectedState: function() {
 			var groupKey = this.selectGroup.getSelectedOption().key;
 			var itemKey = this.selectItem.getSelectedOption().key;
 			
 			if (groupKey === "search") {
-				return;
+				//return;
 			}
 			
 			$.cookie("nxc-selected-state", groupKey + "," + itemKey);
@@ -146,7 +159,7 @@
 				$.cookie("nxc-is-exclude-no-nx", that.isExcludeNoNx, {expires: 100});
 			});
 			$("#nxc-search input").on("keydown", function (evt) {
-				if (evt.keyCode === 13) {
+				if (evt.keyCode === 13) { // Enter
 					that.onSearch();
 				}
 			});
@@ -973,6 +986,7 @@
 				this._search_of_ItemType(key);
 			} else {
 				this._search_of_ItemName();
+				this._saveSearchState();
 			}
 		},
 		
