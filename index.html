@@ -31,81 +31,82 @@
 </head>
 
 <body>
-<div class="language-switcher">
-	Language
-	<select>
-		<option value="en">English</option>
-		<option value="ja">日本語</option>
-	</select>
-</div>
+	<div class="wrapper">
+		<div class="language-switcher">
+			Language
+			<select>
+				<option value="en">English</option>
+				<option value="ja">日本語</option>
+			</select>
+		</div>
 
-<div class="nxc-container">
-	<header aria-label="Header content" role="banner">
-		<div class="nxc-setting-form">
-			<label for="nxc-check-exclude-nonx">
-				<input type="checkbox" id="nxc-check-exclude-nonx" /><span>錬成不可を除外</span>
-			</label>
-		</div>
-		<div id="nxc-search" class="nxc-serch-form">
-			<input type="text" size="16" placeholder="アイテム名" />
-			<button type="button" >検索</button>
-		</div>
-	</header>
-	<section aria-label="Main content" role="main">
-		<div class="nxc-header-index">
-			<!-- load progress -->
-			<div>
-				<div class="nxc-progress-bar"><div></div></div>
-				<div class="nxc-progress-message">読み込み中... 0%</div>
-			</div>
-			<!-- reload page -->
-			<div class="nxc-reload-page">
-				<span>読み込まれない場合はリロードしてください。</span><br />
-				<button type="button" onclick="reloadPage()">ページをリロード</button><br />
+		<div class="nxc-container">
+			<header aria-label="Header content" role="banner">
+				<div class="nxc-setting-form">
+					<label for="nxc-check-exclude-nonx">
+						<input type="checkbox" id="nxc-check-exclude-nonx" /><span>錬成不可を除外</span>
+					</label>
+				</div>
+				<div id="nxc-search" class="nxc-serch-form">
+					<input type="text" size="16" placeholder="アイテム名" />
+					<button type="button" >検索</button>
+				</div>
+			</header>
+			<section aria-label="Main content" role="main">
+				<div class="nxc-header-index">
+					<!-- load progress -->
+					<div>
+						<div class="nxc-progress-bar"><div></div></div>
+						<div class="nxc-progress-message">読み込み中... 0%</div>
+					</div>
+					<!-- reload page -->
+					<div class="nxc-reload-page">
+						<span>読み込まれない場合はリロードしてください。</span><br />
+						<button type="button" onclick="reloadPage()">ページをリロード</button><br />
+						<br />
+						<span>リロードしても駄目な場合は、使用中のブラウザをコメントで報告お願いします。</span><br />
+					</div>
+					<!-- item select container -->
+					<table>
+						<tr>
+							<td>
+								<div id="nxc-select-group" class="nxc-ui-select">
+									<!-- select group container -->
+								</div>
+							</td>
+							<td>
+								<div id="nxc-select-item" class="nxc-ui-select">
+									<!-- select group container -->
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="nxc-main-index">
+					<!-- item tooltip container -->
+					<table>
+						<tr>
+							<td>
+								<div id="nxc-tooltip-left"></div>
+							</td>
+							<td>
+								<div id="nxc-tooltip-right"></div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="nxc-footer-index">
+					<!-- Yotsuba Item DataBase link -->
+					<span id="nxc-yotuba-link"></span>
+					<button type="button" class="nxc-btn-download-captcha">画像として保存</button>
+					<a class="nxc-captcha-link" target="_blank"></a>
+				</div>
+				
+			</section>
+			<footer aria-label="Footer content" role="banner">
 				<br />
-				<span>リロードしても駄目な場合は、使用中のブラウザをコメントで報告お願いします。</span><br />
-			</div>
-			<!-- item select container -->
-			<table>
-				<tr>
-					<td>
-						<div id="nxc-select-group" class="nxc-ui-select">
-							<!-- select group container -->
-						</div>
-					</td>
-					<td>
-						<div id="nxc-select-item" class="nxc-ui-select">
-							<!-- select group container -->
-						</div>
-					</td>
-				</tr>
-			</table>
+			</footer>
 		</div>
-		<div class="nxc-main-index">
-			<!-- item tooltip container -->
-			<table>
-				<tr>
-					<td>
-						<div id="nxc-tooltip-left"></div>
-					</td>
-					<td>
-						<div id="nxc-tooltip-right"></div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="nxc-footer-index">
-			<!-- Yotsuba Item DataBase link -->
-			<span id="nxc-yotuba-link"></span>
-			<button type="button" class="nxc-btn-download-captcha">画像として保存</button>
-			<a class="nxc-captcha-link" target="_blank"></a>
-		</div>
-		
-	</section>
-	<footer aria-label="Footer content" role="banner">
-		<br />
-	</footer>
-</div>
+	</div>
 </body>
-
 </html>
