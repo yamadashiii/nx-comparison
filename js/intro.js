@@ -201,6 +201,7 @@
 			message_search_result: "<span class='nxc-search-result-count'>%d</span> results",
 			message_yotsuba_link: "<a href='http://dl.dropboxusercontent.com/u/70568694/ItemDataBase/ItemDataBase.html?Mode=2&keyword=%s' target='_blank'>%s を四つ葉日記で調べる。</a>",
 			message_download_link: "nx-comparison-%s.png",
+			message_history_group_name: "latest %d",
 			error_read_file: "Failed to read data.",
 			loading_data: "Loading..."
 		},
@@ -351,6 +352,7 @@
 			message_search_result: "検索 <span class='nxc-search-result-count'>%d</span>件",
 			message_yotsuba_link: "<a href='http://dl.dropboxusercontent.com/u/70568694/ItemDataBase/ItemDataBase.html?Mode=2&keyword=%s' target='_blank'>%s を四つ葉日記で調べる。</a>",
 			message_download_link: "Nx比較一覧_%s.png",
+			message_history_group_name: "最新 %d件",
 			error_read_file: "データの読み込みに失敗しました。",
 			loading_data: "読み込み中..."
 		}

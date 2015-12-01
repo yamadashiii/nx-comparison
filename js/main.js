@@ -92,7 +92,7 @@
 		},
 		
 		_restoreSelectedState: function() {
-			var history = $.cookie("nxc-history");
+			var history = $.cookie("nxc-history-" + _Message.getLanguage());
 			
 			if (history) {
 				this.selectGroup.select("history");
@@ -100,7 +100,7 @@
 		},
 		
 		_saveHistory: function(itemId) {
-			var history = $.cookie("nxc-history");
+			var history = $.cookie("nxc-history-" + _Message.getLanguage());
 			var index;
 			history = history ? history.split(",") : [];
 			index = history.indexOf("" + itemId);
@@ -115,7 +115,7 @@
 				history.pop();
 			}
 			
-			$.cookie("nxc-history", history.join(","), {expires: 100});
+			$.cookie("nxc-history-" + _Message.getLanguage(), history.join(","), {expires: 100});
 		},
 		
 		_updateProgress: function(rate) {
@@ -923,10 +923,11 @@
 		_serch_of_History: function() {
 			var i, item, itemId, groupIndex;
 			var groupsData = [
-				{groupName: "最新 " + _Constant.get("cookie_history_length") + "件", options: []},
+				{groupName: scanf(_Message.get("message_history_group_name"), _Constant.get("cookie_history_length")), options: []}
 			];
 			
-			var history = $.cookie("nxc-history");
+			
+			var history = $.cookie("nxc-history-" + _Message.getLanguage());
 			
 			history = history ? history.split(",") : [];
 			
