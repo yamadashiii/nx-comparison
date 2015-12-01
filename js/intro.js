@@ -33,6 +33,7 @@
 	var _constant = {
 		cookie_expires: 365,
 		cookie_key_localize: "local",
+		cookie_history_length: 20,
 		default_language: "ja",
 		path_item_interface: "./img/interface/",
 		path_item_image: "./img/item/iconItem_",
@@ -192,6 +193,7 @@
 			item_group_normal: "Normal",
 			item_group_deluxe: "DX",
 			type_search_item: "Search",
+			type_history: "History",
 			group_basic_information: "<span class='text-color-CYAN'>&ltBasic Information&gt</span>",
 			group_enhanced_information: "<span class='text-color-CYAN'>&ltGrinding Option Information&gt</span>",
 			group_required_ability: "<span class='text-color-CYAN'>&ltRequired Ability&gt</span>",
@@ -337,10 +339,11 @@
 			type_group_weapon: "武器",
 			type_group_protector: "防具",
 			type_group_special: "補助",
-			type_group_search: "検索",
+			type_group_search: "検索・履歴",
 			item_group_normal: "ノーマル",
 			item_group_deluxe: "DX",
 			type_search_item: "検索",
+			type_history: "履歴",
 			group_basic_information: "<span class='text-color-CYAN'>&lt基本情報&gt</span>",
 			group_enhanced_information: "<span class='text-color-CYAN'>&lt錬成 オプション 情報&gt</span>",
 			group_required_ability: "<span class='text-color-CYAN'>&lt要求能力値&gt</span>",
@@ -374,4 +377,3 @@
 	
 	Koukun.NxComparison.Message.selectLanguage(storedLang || browserLang || defaultLang);
 })();
-

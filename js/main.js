@@ -91,21 +91,31 @@
 			}
 		},
 		
-		_saveSelectedState: function() {
-			var groupKey = this.selectGroup.getSelectedOption().key;
-			var itemKey = this.selectItem.getSelectedOption().key;
+		_restoreSelectedState: function() {
+			var history = $.cookie("nxc-history");
 			
-			$.cookie("nxc-selected-state", groupKey + "," + itemKey, {expires: 100});
+			if (history) {
+				this.selectGroup.select("history");
+			}
 		},
 		
-		_restoreSelectedState: function() {
-			var selectedState = $.cookie("nxc-selected-state");
+		_saveHistory: function(itemId) {
+			var history = $.cookie("nxc-history");
+			var index;
+			history = history ? history.split(",") : [];
+			index = history.indexOf("" + itemId);
 			
-			if (selectedState) {
-				selectedState = selectedState.split(",");
-				this.selectGroup.select(selectedState[0]);
-				this.selectItem.select(selectedState[1]);
+			if (index != -1) {
+				history.splice(index, 1);
 			}
+			
+			history.unshift(itemId);
+			
+			if (history.length > _Constant.get("cookie_history_length")) {
+				history.pop();
+			}
+			
+			$.cookie("nxc-history", history.join(","), {expires: 100});
 		},
 		
 		_updateProgress: function(rate) {
@@ -222,7 +232,8 @@
 				{
 					groupName: _Message.get("type_group_search"),
 					options: [
-						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")}
+						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")},
+						{key: "history", icon: "<img src='" + iconPath + "history.png' />", value: _Message.get("type_history")}
 					]
 				}
 			];
@@ -909,6 +920,42 @@
 			this.selectItem.select();
 		},
 		
+		_serch_of_History: function() {
+			var i, item, itemId, groupIndex;
+			var groupsData = [
+				{groupName: "最新 " + _Constant.get("cookie_history_length") + "件", options: []},
+			];
+			
+			var history = $.cookie("nxc-history");
+			
+			history = history ? history.split(",") : [];
+			
+			for (i = 0; i < history.length; i++) {
+				itemId = parseInt(history[i]);
+				item = this._getItem_by_Id(itemId);
+				
+				if (item.Rank == "NX") {
+					continue;
+				}
+				
+				if (this.isExcludeNoNx && item.NxId === 0) {
+					continue;
+				}
+				
+				groupsData[0].options.push({
+					key: item.Id,
+					icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+					value: removeTags(item.Name)
+				});
+			}
+			
+			//groupsData[0].options.sort(sortOrder_of_selectValue);
+			//groupsData[1].options.sort(sortOrder_of_selectValue);
+			
+			this.selectItem.reset({}, groupsData);
+			this.selectItem.select();
+		},
+		
 		_search_of_ItemName: function(key, value) {
 			var i, item, r_keyword, itemName, groupIndex;
 			var matchCount = 0;
@@ -978,22 +1025,30 @@
 			this.tooltipLeft.clearContent();
 			this.tooltipRight.clearContent();
 			
-			if (key !== "search") {
-				this._search_of_ItemType(key);
-			} else {
-				this._search_of_ItemName();
-				this._saveSearchState();
+			switch (key) {
+				case "search":
+					this._search_of_ItemName();
+					this._saveSearchState();
+					break;
+				case "history":
+					this._serch_of_History();
+					break;
+				default:
+					this._search_of_ItemType(key);
+					break;
 			}
 		},
 		
-		onClick_selectItem: function(itemId, value) {
+		onClick_selectItem: function(itemId, value, isTriggered) {
 			var item = this._getItem_by_Id(itemId);
 			
 			if (item) {
 				this._setItemDetails(item);
 				
-				// 選択を保存
-				this._saveSelectedState();
+				// 履歴を保存
+				if (!isTriggered) {
+					this._saveHistory(itemId);
+				}
 			}
 		},
 		
