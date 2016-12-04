@@ -106,6 +106,7 @@
 				19: "Beast Man",
 				20: "Maid",
 				21: "Demon Sorceress",
+				22: "マスケッティア",
 				40: "Exclusive masculine Character Item", // original
 				41: "Exclusive feminine Character Item"   // original
 			},
@@ -171,7 +172,10 @@
 				58: "Twin sword",
 				59: "Costume",
 				60: "クレスト",
-				61: "Crystal"
+				61: "Crystal",
+				62: "",
+				63: "銃",
+				64: "魔弾"
 			},
 			data_version: "0.0644",
 			common_bullet: "- ",
@@ -257,6 +261,7 @@
 				19: "獣人",
 				20: "メイド",
 				21: "黒魔術師",
+				22: "マスケッティア",
 				40: "男性キャラクター専用", // original
 				41: "女性キャラクター専用"  // original
 			},
@@ -322,9 +327,12 @@
 				58: "双剣",
 				59: "ｺｽﾁｭｰﾑ",
 				60: "クレスト",
-				61: "水晶"
+				61: "水晶",
+				62: "",
+				63: "銃",
+				64: "魔弾"
 			},
-			data_version: "0.0622",
+			data_version: "0.0664",
 			common_bullet: "- ",
 			content_minipet_food_type: "ミニペットエサ分類 <span class='text-color-LTYELLOW'>%s</span>",
 			content_shooting_range: "射程距離 <span class='text-color-LTYELLOW'>%d</span>",
