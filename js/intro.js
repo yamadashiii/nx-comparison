@@ -29,7 +29,7 @@
 // 定数の定義
 // ==================================================
 (function() {
-	
+
 	var _constant = {
 		cookie_expires: 365,
 		cookie_key_localize: "local",
@@ -42,7 +42,7 @@
 		path_text_data: "./data/textData.json",
 		path_text_data_en: "./data/textData-en.json"
 	};
-	
+
 	$.extend(Koukun.NxComparison, {
 		Constant: new Koukun.cl.Resource(_constant)
 	});
@@ -53,7 +53,7 @@
 // メッセージの定義
 // ==================================================
 (function() {
-	
+
 	var _messages = {
 		// -------------------------
 		// 英語
@@ -199,13 +199,13 @@
 			group_required_ability: "<span class='text-color-CYAN'>&ltRequired Ability&gt</span>",
 			group_job_available: "<span class='text-color-CYAN'>&ltPut on/Job available&gt</span>",
 			message_search_result: "<span class='nxc-search-result-count'>%d</span> results",
-			message_yotsuba_link: "<a href='http://dl.dropboxusercontent.com/u/70568694/ItemDataBase/ItemDataBase.html?Mode=2&keyword=%s' target='_blank'>%s を四つ葉日記で調べる。</a>",
+			message_yotsuba_link: "<a href='https://yotsuba000.github.io/YotsubaDataBase/ItemDataBase/ItemDataBase.html?Mode=2&keyword=%s' target='_blank'>%s を四つ葉日記で調べる。</a>",
 			message_download_link: "nx-comparison-%s.png",
 			message_history_group_name: "latest %d",
 			error_read_file: "Failed to read data.",
 			loading_data: "Loading..."
 		},
-		
+
 		// -------------------------
 		// 日本語
 		ja: {
@@ -357,8 +357,8 @@
 			loading_data: "読み込み中..."
 		}
 	}
-	
-	
+
+
 	// -----------------------------------
 	// Exports
 	$.extend(Koukun.NxComparison, {
@@ -372,10 +372,10 @@
 // ==================================================
 (function() {
 	var _Constant = Koukun.NxComparison.Constant;
-	
+
 	var storedLang = $.cookie(_Constant.get("cookie_key_localize"));
 	var browserLang = Koukun.fn.getLanguage();
 	var defaultLang = _Constant.get("default_language");
-	
+
 	Koukun.NxComparison.Message.selectLanguage(storedLang || browserLang || defaultLang);
 })();
