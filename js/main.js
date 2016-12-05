@@ -905,7 +905,7 @@
 				}
 
 				if (item.Type == key) {
-					groupIndex = item.Grade == "UM" ? 2 : ("DX" ?  1 : 0);
+					groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
 					groupsData[groupIndex].options.push({
 						key: item.Id,
 						icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
@@ -990,7 +990,7 @@
 					itemName = item.Name.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "");
 
 					if (r_keyword.test(itemName)) {
-						groupIndex = item.Grade == "UM" ? 2 : ("DX" ?  1 : 0);
+						groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
 						matchCount++;
 
 						groupsData[groupIndex].options.push({
