@@ -216,6 +216,15 @@
 			};
 			var selectGroupData = [
 				{
+					groupName: _Message.get("type_group_search"),
+					options: [
+						{key: "history", icon: "<img src='" + iconPath + "history.png' />", value: _Message.get("type_history")},
+						{key: "search_intelli", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_intelli")},
+						{key: "search_brave", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_brave")},
+						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")}
+					]
+				},
+				{
 					groupName: _Message.get("type_group_weapon"),
 					options: optionsData.weapon
 				},
@@ -226,13 +235,6 @@
 				{
 					groupName: _Message.get("type_group_special"),
 					options: optionsData.special
-				},
-				{
-					groupName: _Message.get("type_group_search"),
-					options: [
-						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")},
-						{key: "history", icon: "<img src='" + iconPath + "history.png' />", value: _Message.get("type_history")}
-					]
 				}
 			];
 			var selectItemOption = {
@@ -887,7 +889,8 @@
 			var i, item, groupIndex;
 			var groupsData = [
 				{groupName: _Message.get("item_group_normal"), options: []},
-				{groupName: _Message.get("item_group_deluxe"), options: []}
+				{groupName: _Message.get("item_group_deluxe"), options: []},
+				{groupName: _Message.get("item_group_ultimate"), options: []}
 			];
 
 			for (i = 0; i < this.itemData.length; i++) {
@@ -902,7 +905,7 @@
 				}
 
 				if (item.Type == key) {
-					groupIndex = item.Grade == "DX" ? 1 : 0;
+					groupIndex = item.Grade == "UM" ? 2 : ("DX" ?  1 : 0);
 					groupsData[groupIndex].options.push({
 						key: item.Id,
 						icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
@@ -955,15 +958,20 @@
 			this.selectItem.select();
 		},
 
-		_search_of_ItemName: function(key, value) {
+		_search_of_ItemName: function(keyword) {
 			var i, item, r_keyword, itemName, groupIndex;
 			var matchCount = 0;
 			var groupsData = [
 				{groupName: _Message.get("item_group_normal"), options: []},
-				{groupName: _Message.get("item_group_deluxe"), options: []}
+				{groupName: _Message.get("item_group_deluxe"), options: []},
+				{groupName: _Message.get("item_group_ultimate"), options: []}
 			];
 
-			this.keyword = $("#nxc-search input").val();
+			if (keyword != null) {
+				$("#nxc-search input").val(keyword)
+			}
+
+			this.keyword = keyword || $("#nxc-search input").val();
 
 			if (this.keyword !== "") {
 				r_keyword = new RegExp("(" + this.keyword + ")");
@@ -982,7 +990,7 @@
 					itemName = item.Name.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "");
 
 					if (r_keyword.test(itemName)) {
-						groupIndex = item.Grade == "DX" ? 1 : 0;
+						groupIndex = item.Grade == "UM" ? 2 : ("DX" ?  1 : 0);
 						matchCount++;
 
 						groupsData[groupIndex].options.push({
@@ -1027,6 +1035,14 @@
 			switch (key) {
 				case "search":
 					this._search_of_ItemName();
+					this._saveSearchState();
+					break;
+				case "search_brave":
+					this._search_of_ItemName(_Message.get("type_search_brave"));
+					this._saveSearchState();
+					break;
+				case "search_intelli":
+					this._search_of_ItemName(_Message.get("type_search_intelli"));
 					this._saveSearchState();
 					break;
 				case "history":
@@ -1130,7 +1146,7 @@
 
 	function replaceTextData(org) {
 		var coloring_ltyellow = scanf(_Message.get("content_coloring"), "LTYELLOW", "$1");
-		org = org
+		org = ("" + org)
 			.replace(/(%d)?%a/g, "<br />")
 			.replace(/(\[[^\]]*?)(\d)(.*?\])/g, "$1%v$2$3")
 			.replace(/\[(.*?)\]/g, coloring_ltyellow);
