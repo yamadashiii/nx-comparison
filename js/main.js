@@ -221,7 +221,10 @@
 						{key: "history", icon: "<img src='" + iconPath + "history.png' />", value: _Message.get("type_history")},
 						{key: "search_intelli", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_intelli")},
 						{key: "search_brave", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_brave")},
-						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")}
+						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")},
+						{key: "search_grade_ultimate", icon: "<img src='" + iconPath + "grade-ultimate.gif' />", value: _Message.get("type_search_grade_ultimate")},
+						{key: "search_grade_deluxe", icon: "<img src='" + iconPath + "grade-deluxe.gif' />", value: _Message.get("type_search_grade_deluxe")},
+						{key: "search_grade_normal", icon: "<img src='" + iconPath + "grade-normal.gif' />", value: _Message.get("type_search_grade_normal")}
 					]
 				},
 				{
@@ -888,9 +891,9 @@
 		_search_of_ItemType: function(key, value) {
 			var i, item, groupIndex;
 			var groupsData = [
-				{groupName: _Message.get("item_group_normal"), options: []},
-				{groupName: _Message.get("item_group_deluxe"), options: []},
-				{groupName: _Message.get("item_group_ultimate"), options: []}
+				{groupName: _Message.get("item_grade_normal"), options: []},
+				{groupName: _Message.get("item_grade_deluxe"), options: []},
+				{groupName: _Message.get("item_grade_ultimate"), options: []}
 			];
 
 			for (i = 0; i < this.itemData.length; i++) {
@@ -962,9 +965,9 @@
 			var i, item, r_keyword, itemName, groupIndex;
 			var matchCount = 0;
 			var groupsData = [
-				{groupName: _Message.get("item_group_normal"), options: []},
-				{groupName: _Message.get("item_group_deluxe"), options: []},
-				{groupName: _Message.get("item_group_ultimate"), options: []}
+				{groupName: _Message.get("item_grade_normal"), options: []},
+				{groupName: _Message.get("item_grade_deluxe"), options: []},
+				{groupName: _Message.get("item_grade_ultimate"), options: []}
 			];
 
 			if (keyword != null) {
@@ -1011,6 +1014,42 @@
 			this.selectGroup.setSelectText(scanf(_Message.get("message_search_result"), matchCount));
 		},
 
+		_search_of_ItemGrade: function(grade) {
+			var i, item, groupIndex;
+			var groupsData = [
+				{groupName: _Message.get("item_grade_normal"), options: []},
+				{groupName: _Message.get("item_grade_deluxe"), options: []},
+				{groupName: _Message.get("item_grade_ultimate"), options: []}
+			];
+
+			for (i = 0; i < this.itemData.length; i++) {
+				item = this.itemData[i];
+
+				if (item.Rank == "NX") {
+					continue;
+				}
+
+				if (this.isExcludeNoNx && item.NxId === 0) {
+					continue;
+				}
+
+				if (item.Grade == grade) {
+					groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
+					groupsData[groupIndex].options.push({
+						key: item.Id,
+						icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+						value: removeTags(item.Name)
+					});
+				}
+			}
+
+			groupsData[0].options.sort(sortOrder_of_selectValue);
+			groupsData[1].options.sort(sortOrder_of_selectValue);
+
+			this.selectItem.reset({}, groupsData);
+			this.selectItem.select();
+		},
+
 		_getItem_by_Id: function(itemId) {
 			return this.itemData[this.itemIndexTable[itemId]];
 		},
@@ -1044,6 +1083,15 @@
 				case "search_intelli":
 					this._search_of_ItemName(_Message.get("type_search_intelli"));
 					this._saveSearchState();
+					break;
+				case "search_grade_normal":
+					this._search_of_ItemGrade(_Message.get("item_grade_normal"));
+					break;
+				case "search_grade_deluxe":
+					this._search_of_ItemGrade(_Message.get("item_grade_deluxe"));
+					break;
+				case "search_grade_ultimate":
+					this._search_of_ItemGrade(_Message.get("item_grade_ultimate"));
 					break;
 				case "history":
 					this._serch_of_History();
