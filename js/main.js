@@ -1,3 +1,6 @@
+// TODO
+// 錬成可能フラグを取ってくる
+
 // ==================================================
 // 関数・クラス定義
 // ==================================================
@@ -222,9 +225,9 @@
 						{key: "search_intelli", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_intelli")},
 						{key: "search_brave", icon: "<img src='" + iconPath + "search-any.png' />", value: _Message.get("type_search_brave")},
 						{key: "search", icon: "<img src='" + iconPath + "search.png' />", value: _Message.get("type_search_item")},
-						{key: "search_grade_ultimate", icon: "<img src='" + iconPath + "grade-ultimate.gif' />", value: _Message.get("type_search_grade_ultimate")},
-						{key: "search_grade_deluxe", icon: "<img src='" + iconPath + "grade-deluxe.gif' />", value: _Message.get("type_search_grade_deluxe")},
-						{key: "search_grade_normal", icon: "<img src='" + iconPath + "grade-normal.gif' />", value: _Message.get("type_search_grade_normal")}
+						{key: "search_grade_ultimate", icon: "<img src='" + iconPath + "grade-ultimate.png' />", value: _Message.get("type_search_grade_ultimate")},
+						{key: "search_grade_deluxe", icon: "<img src='" + iconPath + "grade-deluxe.png' />", value: _Message.get("type_search_grade_deluxe")},
+						{key: "search_grade_normal", icon: "<img src='" + iconPath + "grade-normal.png' />", value: _Message.get("type_search_grade_normal")}
 					]
 				},
 				{
