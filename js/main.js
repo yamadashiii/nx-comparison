@@ -914,7 +914,7 @@
 					groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
 					groupsData[groupIndex].options.push({
 						key: item.Id,
-						icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+						icon: item.NxId > 0 && (_Message.get("icon_nx_renewable") + " "),
 						value: removeTags(item.Name)
 					});
 				}
@@ -952,7 +952,7 @@
 
 				groupsData[0].options.push({
 					key: item.Id,
-					icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+					icon: item.NxId > 0 && (_Message.get("icon_nx_renewable") + " "),
 					value: removeTags(item.Name)
 				});
 			}
@@ -1001,7 +1001,7 @@
 
 						groupsData[groupIndex].options.push({
 							key: item.Id,
-							icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+							icon: item.NxId > 0 && (_Message.get("icon_nx_renewable") + " "),
 							value: removeTags(item.Name).replace(r_keyword, "<span class='nxc-search-keyword'>$1</span>")
 						});
 					}
@@ -1040,7 +1040,7 @@
 					groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
 					groupsData[groupIndex].options.push({
 						key: item.Id,
-						icon: item.NxId > 0 && "<span class='nxc-exist-nx-icon'>Nx</span> ",
+						icon: item.NxId > 0 && (_Message.get("icon_nx_renewable") + " "),
 						value: removeTags(item.Name)
 					});
 				}
