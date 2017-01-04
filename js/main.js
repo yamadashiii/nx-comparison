@@ -920,9 +920,10 @@
 				}
 			}
 
-			groupsData[0].options.sort(sortOrder_of_selectValue);
-			groupsData[1].options.sort(sortOrder_of_selectValue);
-
+			$.each(groupsData, function(index, groupData) {
+				groupData.options.sort(sortOrder_of_selectValue);
+			});
+			
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 		},
@@ -956,9 +957,6 @@
 					value: removeTags(item.Name)
 				});
 			}
-
-			//groupsData[0].options.sort(sortOrder_of_selectValue);
-			//groupsData[1].options.sort(sortOrder_of_selectValue);
 
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
@@ -1008,9 +1006,10 @@
 				}
 			}
 
-			groupsData[0].options.sort(sortOrder_of_selectValue);
-			groupsData[1].options.sort(sortOrder_of_selectValue);
-
+			$.each(groupsData, function(index, groupData) {
+				groupData.options.sort(sortOrder_of_selectValue);
+			});
+			
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 
@@ -1046,9 +1045,10 @@
 				}
 			}
 
-			groupsData[0].options.sort(sortOrder_of_selectValue);
-			groupsData[1].options.sort(sortOrder_of_selectValue);
-
+			$.each(groupsData, function(index, groupData) {
+				groupData.options.sort(sortOrder_of_selectValue);
+			});
+			
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 		},
