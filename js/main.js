@@ -925,7 +925,7 @@ let isOutputMode = false;
 			$.each(groupsData, function(index, groupData) {
 				groupData.options.sort(sortOrder_of_selectValue);
 			});
-			
+
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 		},
@@ -962,7 +962,7 @@ let isOutputMode = false;
 			$.each(groupsData, function(index, groupData) {
 				groupData.options.sort(sortOrder_of_selectValue);
 			});
-			
+
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 
@@ -971,7 +971,7 @@ let isOutputMode = false;
 			var allText = "";
 			allText += "<style>" + $(".style-for-output").text() + "</style>";
 			allText += '<br><a href="http:\/\/kou0120.blog.fc2.com/blog-entry-70.html" title="NxU比較ツール"><b>NxU比較ツールへ</b></a><br>';
-			
+
 			// create header
 			var cont = $("<div>");
 			var d = $("<div>").addClass("nx-anchor").attr("id", "nx-anchor");
@@ -1000,7 +1000,7 @@ let isOutputMode = false;
 					tds[groupIndex].append(div);
 				});
 			});
-			
+
 			allText += cont.html();
 
 			// create body
@@ -1008,7 +1008,7 @@ let isOutputMode = false;
 				$.each(groupData.options, function(dataIndex, data) {
 					var key = data.key;
 					that.selectItem.select(key);
-					
+
 					var table = $(".tooltip-panel");
 					table.children("table").attr("id", "nx-comparison-item-" + key);
 					table.find("tbody > tr > td > div").removeAttr("id");
@@ -1104,7 +1104,7 @@ let isOutputMode = false;
 			$.each(groupsData, function(index, groupData) {
 				groupData.options.sort(sortOrder_of_selectValue);
 			});
-			
+
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 
@@ -1143,7 +1143,7 @@ let isOutputMode = false;
 			$.each(groupsData, function(index, groupData) {
 				groupData.options.sort(sortOrder_of_selectValue);
 			});
-			
+
 			this.selectItem.reset({}, groupsData);
 			this.selectItem.select();
 		},
@@ -1215,8 +1215,8 @@ let isOutputMode = false;
 
 		onClick_downloadCaptcha: function() {
 			var that = this;
-
-			html2canvas($(".nxc-main-index").get(0), {
+            
+			html2canvas($(".tooltip-panel"), {
 				onrendered: function(canvas) {
 					var blob = canvasToBlob(canvas);
 					var selectedItemName = that.selectItem.getSelectedValue() || "未選択";
