@@ -1,6 +1,8 @@
 // TODO
 // 錬成可能フラグを取ってくる
 
+let isOutputMode = false;
+
 // ==================================================
 // 関数・クラス定義
 // ==================================================
@@ -928,6 +930,99 @@
 			this.selectItem.select();
 		},
 
+		_search_of_ItemType_for_Output: function(key, value) {
+			var i, item, groupIndex;
+			var groupsData = [
+				{groupName: _Message.get("item_grade_normal"), options: []},
+				{groupName: _Message.get("item_grade_deluxe"), options: []},
+				{groupName: _Message.get("item_grade_ultimate"), options: []}
+			];
+
+			for (i = 0; i < this.itemData.length; i++) {
+				item = this.itemData[i];
+
+				if (item.Rank == "NX") {
+					continue;
+				}
+
+				if (this.isExcludeNoNx && item.NxId === 0) {
+					continue;
+				}
+
+				if (item.Type == key) {
+					groupIndex = item.Grade == "UM" ? 2 : (item.Grade == "DX" ?  1 : 0);
+					groupsData[groupIndex].options.push({
+						key: item.Id,
+						icon: item.NxId > 0 && (_Message.get("icon_nx_renewable") + " "),
+						value: removeTags(item.Name)
+					});
+				}
+			}
+
+			$.each(groupsData, function(index, groupData) {
+				groupData.options.sort(sortOrder_of_selectValue);
+			});
+			
+			this.selectItem.reset({}, groupsData);
+			this.selectItem.select();
+
+			// ready output
+			var that = this;
+			var allText = "";
+			allText += "<style>" + $(".style-for-output").text() + "</style>";
+			allText += '<br><a href="http:\/\/kou0120.blog.fc2.com/blog-entry-70.html" title="NxU比較ツール"><b>NxU比較ツールへ</b></a><br>';
+			
+			// create header
+			var cont = $("<div>");
+			var d = $("<div>").addClass("nx-anchor").attr("id", "nx-anchor");
+			var t = $("<table>");
+			var tr1 = $("<tr>").addClass("nx-anchor-type");;
+			var tr2 = $("<tr>").addClass("nx-anchor-name");
+			var tds = [$("<td>"), $("<td>"), $("<td>")];
+			tr1.append($("<td>").text("N"));
+			tr1.append($("<td>").text("DX"));
+			tr1.append($("<td>").text("UM"));
+			tr2.append(tds[0]);
+			tr2.append(tds[1]);
+			tr2.append(tds[2]);
+			t.append(tr1);
+			t.append(tr2);
+			d.append(t);
+			cont.append(d);
+
+			$.each(groupsData, function(groupIndex, groupData) {
+				$.each(groupData.options, function(dataIndex, data) {
+					var key = data.key;
+					var name = data.value;
+					var div = $("<div>");
+					var a = $("<a>").attr("href", "#nx-comparison-item-" + key).text(name);
+					div.append(a);
+					tds[groupIndex].append(div);
+				});
+			});
+			
+			allText += cont.html();
+
+			// create body
+			$.each(groupsData, function(groupIndex, groupData) {
+				$.each(groupData.options, function(dataIndex, data) {
+					var key = data.key;
+					that.selectItem.select(key);
+					
+					var table = $(".tooltip-panel");
+					table.children("table").attr("id", "nx-comparison-item-" + key);
+					table.find("tbody > tr > td > div").removeAttr("id");
+					table.find(".item-image").parent().remove();
+					allText += table.html().replace(/<!--.+-->/, "").replace(/\t|\n/g, "")
+					allText += "<div class='nx-anchor-go-top'><a href='#nx-anchor'>上へ</a></div>" + "\n";
+				});
+			});
+
+			//console.log(allText);
+
+			$("body").prepend($("<textarea>").attr({width: 500, height: 100}).text(allText));
+		},
+
 		_serch_of_History: function() {
 			var i, item, itemId, groupIndex;
 			var groupsData = [
@@ -1100,7 +1195,7 @@
 					this._serch_of_History();
 					break;
 				default:
-					this._search_of_ItemType(key);
+					isOutputMode == true ? this._search_of_ItemType_for_Output(key) : this._search_of_ItemType(key);
 					break;
 			}
 		},
