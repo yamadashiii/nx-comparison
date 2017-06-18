@@ -31,7 +31,7 @@
 (function() {
 
 	var _constant = {
-		cookie_expires: 365,
+		cookie_expires: 3651,
 		cookie_key_localize: "local",
 		cookie_history_length: 20,
 		default_language: "ja",
