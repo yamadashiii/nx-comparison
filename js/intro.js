@@ -59,7 +59,7 @@
 		// 英語
 		en: {
 			minipet_food_type: {
-				1: "Biological type",
+				1: "Biological type2",
 				2: "Energy type",
 				3: "Inorganic type"
 			},
